@@ -10,7 +10,7 @@ router.post('/', async (req, res, next) => {
     'privateKey': keypar.secret()
   }
   
-  if(req.body.fundAccound == true){
+  if(req.body.fundAccount == true){
     console.log('Account created');
     await fundAccount(keypar);
     response.note = 'Account created with success! Funded with 10_000 lumens.';
