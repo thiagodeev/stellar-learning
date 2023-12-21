@@ -34,7 +34,8 @@ You'll need to have NodeJS installed in your machine (>=v.18 preferred). Then:
     [server]: Server is running at http://localhost:3000 
 
 ### Using the docker image:
-You'll need to have Docker installed in your machine. Then:
+You'll need to have Docker installed in your machine. There are two platforms versions: `arm64` and `amd64`.
+Then:
 1. Just run this command:
     ``` docker
     docker run --rm  -it -p 3000:3000 --name stellar-learning thiagodeev/stellar-learning
@@ -80,3 +81,31 @@ If you send an empty post request to this endpoint, it'll generate a Stellar key
       "note": "Account created with success! Funded with 10_000 lumens."
     }
     ```
+
+1. POST `localhost:3000/balance`  
+Here, you just need to pass a JSON with the `publicKey` that you want to know the balance on Stellar Testnet. Here is a sample of it:
+    ``` json
+    {
+      "publicKey": "GDXWWGTVOK7ABJHJWSI3KBFA4CCWXVVFJPDMGRHBR2KKJXMOU7XLAUH5"
+    }
+    ```
+    This account has Lumens, so the response will be like this:
+    ``` json
+    [
+      {
+        "native": "10000.0000000"
+      }
+    ]
+    ```
+    However, if you pass a invalid or empty `publicKey`, the result will be:
+    ``` json
+    {
+      "type": "https://stellar.org/horizon-errors/not_found",
+      "title": "Resource Missing",
+      "status": 404,
+      "detail": "The resource at the url requested was not found.  This usually occurs for one of two reasons:  The url requested is not valid, or no data in our database could be found with the parameters provided."
+    }
+    ```
+
+## Conclusion
+That's it! I hope you've learned with me the very basic of interacting with Stellar blockchain using the source code of this repositorie. See you later
