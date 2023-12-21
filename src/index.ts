@@ -1,20 +1,18 @@
 import express, { Express, Request, Response } from "express";
-import birds from "./routes/index";
-
+import createKeypar from "./routes/createKeypar";
+import balance from "./routes/balance";
 
 const app: Express = express();
 const port = 3000;
 
+app.use(express.json())
 app.get("/", (req: Request, res: Response) => {
-  res.status(200).send("Olá");
+  res.status(200).send("<h5>====================</h5><h3>Wellcome</h3><h5>====================</h5><p> Made by Thiagodeev</p>");
 });
 
-// app.use("/test", router)
-app.get("/test", (req: Request, res: Response) => {
-  res.status(200).send("asdfasfd");
-});
 
-app.use('/birds', birds)
+app.use('/createKeypar', createKeypar)
+app.use('/balance', balance)
 
 
 app.listen(port, () => {
